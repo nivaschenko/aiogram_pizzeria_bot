@@ -5,7 +5,7 @@ from aiogram.utils.formatting import as_list, as_marked_section, Bold
 
 from filters.chat_types import ChatTypeFilter
 from filters.message_types import MessageContentTypeFilter
-from keyboards.reply import start_kb3
+from keyboards.reply import get_keyboard
 
 user_private_router = Router()
 user_private_router.message.filter(ChatTypeFilter(['private']))
@@ -15,10 +15,14 @@ user_private_router.message.filter(ChatTypeFilter(['private']))
 async def start_cmd(message: types.Message):
     await message.answer(
         text='Hi, I\'m personal assistant',
-        reply_markup=start_kb3.as_markup(
-            resize_keyboard=True,
-            input_field_placeholder='Select an option'
-        )
+        reply_markup=get_keyboard(
+            "Navigation",
+            "About",
+            "Payment Options",
+            "Shipping Options",
+            placeholder="Please make your choice",
+            sizes=(2, 2),
+        ),
     )
 
 

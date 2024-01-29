@@ -22,12 +22,6 @@ RUN python -m venv /py && \
         --disabled-password \
         --no-create-home \
         www-data && \
-#    mkdir -p /vol/web/media && \
-#    mkdir -p /vol/web/media/uploads && \
-#    mkdir -p /vol/web/static && \
-#    chown -R www-data:www-data /vol && \
-#    chmod -R 755 /vol && \
-#    chmod -R 755 /vol/web/media/uploads \
     chmod -R +x /scripts
 
 ENV PATH="/scripts:/py/bin:$PATH"

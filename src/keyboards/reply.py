@@ -1,6 +1,43 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, KeyboardButtonPollType
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
+
+def get_keyboard(
+        *btns: str,
+        placeholder: str = None,
+        request_contacts: int = None,
+        request_location: int = None,
+        sizes: tuple = (2,),
+) -> ReplyKeyboardMarkup:
+    """
+    Parameters request_contacts and request_location must be as indexes of btns args for buttons you need
+    :param btns:
+    :param placeholder:
+    :param request_contacts:
+    :param request_location:
+    :param sizes:
+    :return ReplyKeyboardBuilder:
+    """
+
+    keyboard = ReplyKeyboardBuilder()
+
+    for index, text in enumerate(btns, start=0):
+        if request_contacts and request_contacts == index:
+            keyboard.add(KeyboardButton(text=text, request_contacts=True))
+        elif request_location and request_location == index:
+            keyboard.add(KeyboardButton(text=text, request_location=True))
+        else:
+            keyboard.add(KeyboardButton(text=text))
+
+    return keyboard.adjust(*sizes).as_markup(
+        resize_keyboard=True, input_field_placeholder=placeholder
+    )
+
+
+
+
+
+
 start_kb = ReplyKeyboardMarkup(
     keyboard=[
         [
